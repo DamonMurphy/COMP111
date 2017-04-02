@@ -1,0 +1,34 @@
+// From Lab 5
+/**
+     * Sort the stations according to distance from a target location.
+     * 
+     * @param   target    the target location.
+     */
+    public void sortByDistance(Location target)
+    {
+        //Using ascending bubble sort
+        boolean didSwap = true;
+        int last = stations.size() -1;
+        double targetLat = target.getLatitude();
+        double targetLong = target.getLongitude();
+        
+        while (didSwap) {
+            didSwap = false; 
+            for (int i = 0; i<last; ++i) { 
+                Station tempStation1 = new Station(this.getStation(i));
+                Station tempStation2 = new Station(this.getStation(i+1));
+                double dist1 = tempStation1.calcDistance(targetLat,targetLong);
+                double dist2 = tempStation2.calcDistance(targetLat,targetLong);
+                if (dist1 > dist2) { 
+                    didSwap = true; 
+                    Station temp = stations.get(i); 
+                    stations.set(i, stations.get(i+1)); 
+                    stations.set(i+1, temp); 
+                } 
+            } 
+            --last;
+
+        }
+        
+        
+    }
